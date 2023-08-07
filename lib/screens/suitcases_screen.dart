@@ -1,73 +1,86 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '/image_provider.dart';
-import 'suitcasecreation_screen.dart'; // Stelle sicher, dass der Import-Pfad korrekt ist
 
 class SuitcasesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final mySecondImageProvider = Provider.of<MySecondImageProvider>(context);
-
+    // final mySecondImageProvider = Provider.of<MySecondImageProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Koffer'),
       ),
       body: Column(
         children: [
-          Expanded(
-            child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 8,
-                crossAxisSpacing: 8,
-              ),
-              itemCount: mySecondImageProvider.images.length,
-              itemBuilder: (context, index) {
-                final item = mySecondImageProvider.images[index];
-
-                return GestureDetector(
-                  onTap: () {
-                    _editDescription(context, mySecondImageProvider, item);
-                  },
-                  child: Card(
-                    child: Column(
-                      children: [
-                        Flexible(
-                          child: Image.file(
-                            item.image,
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                        Text(item.description),
-                        ElevatedButton(
-                          onPressed: () {
-                            _deleteImage(context, mySecondImageProvider, item);
-                          },
-                          child: Icon(Icons.delete),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SuitcasecreationScreen(),
-                  ),
-                );
+              onPressed: () async {
+                final picker = ImagePicker();
+                final pickedImage = await picker.pickImage(source: ImageSource.gallery);
+                if (pickedImage != null) {
+                  // Hier Logik zum Hinzufügen des ausgewählten Bildes als neuen Koffer
+                }
               },
-              child: Text('Koffer hinzufügen'),
+              child: Text('Wähle ein Bild aus, was du in deinen Koffer packen möchtest.'),
             ),
           ),
         ],
+        // children: [
+        //   Expanded(
+        //     child: GridView.builder(
+        //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        //         crossAxisCount: 2,
+        //         mainAxisSpacing: 8,
+        //         crossAxisSpacing: 8,
+        //       ),
+        //       itemCount: mySecondImageProvider.images.length,
+        //       itemBuilder: (context, index) {
+        //         final item = mySecondImageProvider.images[index];
+
+        //         return GestureDetector(
+        //           onTap: () {
+        //             _editDescription(context, mySecondImageProvider, item);
+        //           },
+        //           child: Card(
+        //             child: Column(
+        //               children: [
+        //                 Flexible(
+        //                   child: Image.file(
+        //                     item.image,
+        //                     fit: BoxFit.contain,
+        //                   ),
+        //                 ),
+        //                 Text(item.description),
+        //                 ElevatedButton(
+        //                   onPressed: () {
+        //                     _deleteImage(context, mySecondImageProvider, item);
+        //                   },
+        //                   child: Icon(Icons.delete),
+        //                 ),
+        //               ],
+        //             ),
+        //           ),
+        //         );
+        //       },
+        //     ),
+        //   ),
+        //   Padding(
+        //     padding: const EdgeInsets.all(16.0),
+        //     child: ElevatedButton(
+        //       onPressed: () {
+        //         Navigator.push(
+        //           context,
+        //           MaterialPageRoute(
+        //             builder: (context) => SuitcasecreationScreen(),
+        //           ),
+        //         );
+        //       },
+        //       child: Text('Koffer hinzufügen'),
+        //     ),
+        //   ),
+        // ],
       ),
     );
   }
