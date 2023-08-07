@@ -58,6 +58,14 @@ class MyImageProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  void toggleLike(ClothingItem item) {
+    final index = _images.indexOf(item);
+    if (index != -1) {
+      _images[index].isLiked = !_images[index].isLiked;
+      notifyListeners();
+    }
+  }
 }
 
 class MySecondImageProvider extends ChangeNotifier {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ClothingItem {
-  final String imagePath; // Änderung: Speichert den Dateinamen oder Pfad
+  final String imagePath;
   String description;
   bool isLiked;
 

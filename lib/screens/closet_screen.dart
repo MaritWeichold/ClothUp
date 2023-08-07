@@ -10,8 +10,6 @@ class ClosetScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final myImageProvider = Provider.of<MyImageProvider>(context);
-    final mySecondImageProvider = Provider.of<MySecondImageProvider>(context);
-
 
     return Scaffold(
       body: GridView.builder(
@@ -43,6 +41,14 @@ class ClosetScreen extends StatelessWidget {
                       children: [
                         ElevatedButton(
                           onPressed: () {
+                            _toggleLike(context, myImageProvider, item);
+                          },
+                          child: Icon(
+                            item.isLiked ? Icons.star : Icons.star_outline,
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
                             _deleteImage(context, myImageProvider, item);
                           },
                           child: Icon(Icons.delete),
@@ -62,7 +68,6 @@ class ClosetScreen extends StatelessWidget {
                   if (pickedImage != null) {
                     final imageFile = File(pickedImage.path);
                     myImageProvider.addImage(ClothingItem(image: imageFile));
-                    mySecondImageProvider.addImage(ClothingItem(image: imageFile));
                   }
                 },
                 child: Text(
@@ -75,6 +80,10 @@ class ClosetScreen extends StatelessWidget {
         },
       ),
     );
+  }
+  
+  void _toggleLike(BuildContext context, MyImageProvider myImageProvider, ClothingItem item) {
+    myImageProvider.toggleLike(item);
   }
 
   // Beschreibung bearbeiten

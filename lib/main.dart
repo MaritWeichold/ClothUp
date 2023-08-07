@@ -76,10 +76,10 @@ class _ClosetState extends State<Closet> {
         ),
         centerTitle: true,
         backgroundColor: Theme.of(context).colorScheme.primary,
-        leading: IconButton(
-          icon: Icon(Icons.delete),
-          onPressed: null,
-        ),
+        // leading: IconButton(
+        //   icon: Icon(Icons.delete),
+        //   onPressed: null,
+        // ),
       ),
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: currentIndex,

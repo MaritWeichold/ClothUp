@@ -61,7 +61,6 @@ class _OutfitcreationScreenState extends State<OutfitcreationScreen> {
     );
   }
 
-  // Methode zum Umschalten der Auswahl
   void _toggleImageSelection(File image) {
     setState(() {
       if (selectedImages.contains(image)) {
